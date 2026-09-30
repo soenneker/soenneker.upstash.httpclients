@@ -10,7 +10,7 @@ namespace Soenneker.Upstash.HttpClients.Tests;
 public sealed class UpstashOpenApiHttpClientTests(Host host) : HostedUnitTest(host)
 {
     [Test]
-    public async Task Get_configures_basic_auth_and_preserves_base_path()
+    public async ValueTask Get_configures_basic_auth_and_preserves_base_path()
     {
         var client = await Resolve<IUpstashOpenApiHttpClient>(true).Get();
         await Assert.That(client.BaseAddress!.AbsoluteUri).IsEqualTo("https://upstash.example.test/v2/");
@@ -22,7 +22,7 @@ public sealed class UpstashOpenApiHttpClientTests(Host host) : HostedUnitTest(ho
     }
 
     [Test]
-    public async Task Get_reuses_the_cached_client()
+    public async ValueTask Get_reuses_the_cached_client()
     {
         var wrapper = Resolve<IUpstashOpenApiHttpClient>(true);
         var first = await wrapper.Get();
