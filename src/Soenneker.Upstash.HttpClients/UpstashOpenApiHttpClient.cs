@@ -29,8 +29,8 @@ public sealed class UpstashOpenApiHttpClient : IUpstashOpenApiHttpClient
     {
         return _httpClientCache.Get(nameof(UpstashOpenApiHttpClient), (config: _config, baseUrl: _config["Upstash:ClientBaseUrl"] ?? _prodBaseUrl), static state =>
         {
-            var email = state.config.GetValueStrict<string>("Upstash:Email");
-            var apiKey = state.config.GetValueStrict<string>("Upstash:ApiKey");
+            var email = state.config.GetStringStrict("Upstash:Email");
+            var apiKey = state.config.GetStringStrict("Upstash:ApiKey");
             if (string.IsNullOrWhiteSpace(email) || email.Contains(':') || string.IsNullOrWhiteSpace(apiKey))
                 throw new InvalidOperationException("Upstash:Email and Upstash:ApiKey must be nonempty; the email cannot contain a colon.");
 
